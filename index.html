@@ -1,0 +1,1705 @@
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme Lopes - Desenvolvedor Backend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = {
+            "theme": {
+                "extend": {
+                    "colors": {
+                        "slate-950": "#0f172a",
+                        "slate-900": "#1e293b",
+                        "slate-800": "#334155",
+                        "slate-700": "#475569",
+                        "blue-500": "#3b82f6",
+                        "cyan-500": "#06b6d4"
+                    },
+                    "fontFamily": {
+                        "code": [
+                            "JetBrains Mono",
+                            "Monaco",
+                            "Consolas",
+                            "monospace"
+                        ]
+                    }
+                }
+            }
+        };</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grid-pattern {
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.15) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .skill-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+            }
+
+            .project-card:hover {
+                transform: scale(1.02);
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            max-height: 400px;
+        }
+
+        /* Carousel Indicators */
+        .carousel-indicator.active {
+            background-color: #3b82f6;
+            transform: scale(1.2);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
+    <style>
+        .highlighted-section {
+            outline: 2px solid #3F20FB;
+            background-color: rgba(63, 32, 251, 0.1);
+        }
+
+        .edit-button {
+            position: absolute;
+            z-index: 1000;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        html,
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-gray-100 overflow-x-hidden">
+
+    <!-- Header Navigation -->
+    <header id="header"
+        class="fixed top-0 left-0 w-full z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800/50 transition-all duration-300">
+        <nav class="container mx-auto px-4 sm:px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-xl sm:text-2xl font-bold gradient-text">GL</div>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="#inicio" id="nav-inicio" data-translate="nav.inicio"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer">Início</a>
+                    <a href="#sobre" id="nav-sobre" data-translate="nav.sobre"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer">Sobre</a>
+                    <a href="#projetos" id="nav-projetos" data-translate="nav.projetos"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer">Projetos</a>
+                    <a href="#habilidades" id="nav-habilidades" data-translate="nav.habilidades"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer">Habilidades</a>
+                    <a href="#experiencia" id="nav-experiencia" data-translate="nav.experiencia"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer">Experiência</a>
+                    <a href="#contato" id="nav-contato" data-translate="nav.contato"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer">Contato</a>
+
+                    <!-- Language Selector -->
+                    <div class="relative">
+                        <button id="language-btn"
+                            class="flex items-center space-x-2 text-gray-300 hover:text-blue-400 transition-colors duration-300">
+                            <img src="Flag_of_Brazil.png" alt="Brasil" class="w-6 h-4 rounded-sm object-cover">
+                            <span class="text-sm">PT</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="language-dropdown"
+                            class="absolute right-0 top-full mt-2 w-32 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 hidden">
+                            <button
+                                class="language-option w-full flex items-center space-x-2 px-4 py-2 text-left text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300"
+                                data-lang="pt">
+                                <img src="Flag_of_Brazil.png" alt="Brasil" class="w-6 h-4 rounded-sm object-cover">
+                                <span>Português</span>
+                            </button>
+                            <button
+                                class="language-option w-full flex items-center space-x-2 px-4 py-2 text-left text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300"
+                                data-lang="en">
+                                <img src="Flag_of_the_United_States.svg" alt="Estados Unidos"
+                                    class="w-6 h-4 rounded-sm object-cover">
+                                <span>English</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn"
+                    class="md:hidden text-gray-300 hover:text-blue-400 transition-colors duration-300">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="flex flex-col space-y-4 py-4">
+                    <a href="#inicio" id="nav-mobile-inicio" data-translate="nav.inicio"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer py-2">Início</a>
+                    <a href="#sobre" id="nav-mobile-sobre" data-translate="nav.sobre"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer py-2">Sobre</a>
+                    <a href="#projetos" id="nav-mobile-projetos" data-translate="nav.projetos"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer py-2">Projetos</a>
+                    <a href="#habilidades" id="nav-mobile-habilidades" data-translate="nav.habilidades"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer py-2">Habilidades</a>
+                    <a href="#experiencia" id="nav-mobile-experiencia" data-translate="nav.experiencia"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer py-2">Experiência</a>
+                    <a href="#contato" id="nav-mobile-contato" data-translate="nav.contato"
+                        class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer py-2">Contato</a>
+
+                    <!-- Mobile Language Selector -->
+                    <div class="pt-4 border-t border-slate-700/50">
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mb-2">Idioma</div>
+                        <div class="flex space-x-2">
+                            <button
+                                class="mobile-language-option flex items-center space-x-2 px-3 py-2 bg-slate-800/50 rounded-lg text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300"
+                                data-lang="pt">
+                                <img src="Flag_of_Brazil.png" alt="Brasil" class="w-5 h-3 rounded-sm object-cover">
+                                <span class="text-sm">PT</span>
+                            </button>
+                            <button
+                                class="mobile-language-option flex items-center space-x-2 px-3 py-2 bg-slate-800/50 rounded-lg text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300"
+                                data-lang="en">
+                                <img src="Flag_of_the_United_States.svg" alt="Estados Unidos"
+                                    class="w-5 h-3 rounded-sm object-cover">
+                                <span class="text-sm">EN</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio"
+        class="relative min-h-[100vh] flex items-center justify-center grid-pattern overflow-hidden pt-20 sm:pt-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 opacity-90"></div>
+
+        <!-- Floating Code Elements - Hidden on mobile -->
+        <div class="hidden md:block absolute top-20 left-10 text-blue-400/30 code-font text-sm floating-animation">
+            &lt;developer&gt;
+        </div>
+        <div class="hidden md:block absolute top-40 right-20 text-cyan-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 1s;">
+            function() { return 'backend'; }
+        </div>
+        <div class="hidden md:block absolute bottom-40 left-20 text-blue-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 2s;">
+            &lt;/developer&gt;
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-6 sm:mb-8">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+                        <span class="gradient-text">Guilherme</span><br>
+                        <span class="text-gray-100">Lopes</span>
+                    </h1>
+                </div>
+
+                <div id="hero-subtitle" data-translate="hero.subtitle"
+                    class="mb-6 sm:mb-8 code-font text-sm sm:text-base md:text-lg lg:text-xl text-blue-400 px-2">
+                    Criando soluções robustas e escaláveis
+                </div>
+
+                <p data-translate="hero.description"
+                    class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2">
+                    Especializado em desenvolvimento de Sistemas Web, APIs, Web Scraping e Análise de Dados. Com mais de
+                    4 anos de experiência.
+                </p>
+
+                <div class="flex items-center justify-center text-sm sm:text-base text-gray-400 mb-8 sm:mb-10">
+                    <i class="fa-solid fa-location-dot text-blue-400 mr-2"></i>
+                    <span data-translate="hero.location">Guarujá, São Paulo, Brasil</span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+                    <a href="#projetos" id="hero-cta1" data-translate="hero.cta1"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                        <i class="fa-solid fa-code mr-2"></i>
+                        Ver Projetos
+                    </a>
+                    <a href="#contato" id="hero-cta2" data-translate="hero.cta2"
+                        class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-blue-500 text-blue-400 font-semibold rounded-lg hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                        <i class="fa-solid fa-envelope mr-2"></i>
+                        Entre em Contato
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-12 sm:py-16 md:py-20 bg-slate-900 relative">
+
+        <!-- Floating Code Elements - Hidden on mobile -->
+        <div class="hidden md:block absolute top-20 left-10 text-blue-400/30 code-font text-sm floating-animation">
+            &lt;developer&gt;
+        </div>
+        <div class="hidden md:block absolute top-40 right-20 text-cyan-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 1s;">
+            function() { return 'about'; }
+        </div>
+        <div class="hidden md:block absolute bottom-40 left-20 text-blue-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 2s;">
+            &lt;/developer&gt;
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 id="about-title" data-translate="about.title"
+                        class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text">Sobre Mim</h2>
+                    <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+                    <div class="relative order-1 lg:order-1">
+                        <div
+                            class="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden shadow-2xl">
+                            <img src="image.jpg" alt="Guilherme Lopes" class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="hidden sm:block absolute -top-4 -right-4 w-16 sm:w-20 h-16 sm:h-20 bg-blue-400/20 rounded-full floating-animation">
+                        </div>
+                        <div class="hidden sm:block absolute -bottom-4 -left-4 w-12 sm:w-16 h-12 sm:h-16 bg-cyan-400/20 rounded-full floating-animation"
+                            style="animation-delay: 1s;"></div>
+                    </div>
+
+                    <div class="order-2 lg:order-2">
+                        <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-blue-400">Desenvolvedor Backend
+                        </h3>
+                        <div
+                            class="text-gray-300 leading-relaxed space-y-3 sm:space-y-4 text-sm sm:text-base md:text-lg">
+                            <p id="about-desc1" data-translate="about.description1">
+                                Desenvolvedor Backend formado em Sistemas de Informação com mais de 4 anos de
+                                experiência em desenvolvimento de APIs, web scraping e análise de dados.
+                            </p>
+                            <p id="about-desc2" data-translate="about.description2">
+                                Especialista em Python, PHP, JavaScript, Power BI e Bancos de Dados SQL, com foco em
+                                criar soluções robustas e escaláveis para empresas.
+                            </p>
+                            <p id="about-desc3" data-translate="about.description3">
+                                Proativo e orientado à melhoria contínua, busco transformar dados em resultados
+                                estratégicos que gerem impacto positivo para as organizações.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlight Cards -->
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 skill-card">
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                            <i class="fa-solid fa-code text-xl sm:text-2xl text-white"></i>
+                        </div>
+                        <h4 id="about-backend-title" data-translate="about.highlights.backend.title"
+                            class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-blue-400">Desenvolvimento Backend
+                        </h4>
+                        <p id="about-backend-desc" data-translate="about.highlights.backend.description"
+                            class="text-sm sm:text-base text-gray-300">APIs REST, Python, PHP, Laravel, Node.js, Web
+                            Scraping com Playwright</p>
+                    </div>
+
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 skill-card">
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                            <i class="fa-solid fa-database text-xl sm:text-2xl text-white"></i>
+                        </div>
+                        <h4 id="about-database-title" data-translate="about.highlights.database.title"
+                            class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-blue-400">Bancos de Dados & ETL
+                        </h4>
+                        <p id="about-database-desc" data-translate="about.highlights.database.description"
+                            class="text-sm sm:text-base text-gray-300">MySQL, SQL Server, PostgreSQL, SQLite, Processos
+                            ETL</p>
+                    </div>
+
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 skill-card">
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                            <i class="fa-solid fa-chart-line text-xl sm:text-2xl text-white"></i>
+                        </div>
+                        <h4 id="about-analytics-title" data-translate="about.highlights.analytics.title"
+                            class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-blue-400">Análise & Visualização
+                        </h4>
+                        <p id="about-analytics-desc" data-translate="about.highlights.analytics.description"
+                            class="text-sm sm:text-base text-gray-300">Power BI, Excel, Dashboards Interativos, Business
+                            Intelligence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projetos" class="py-12 sm:py-16 md:py-20 bg-slate-950 relative">
+
+        <!-- Floating Code Elements - Hidden on mobile -->
+        <div class="hidden md:block absolute top-20 left-10 text-blue-400/30 code-font text-sm floating-animation">
+            &lt;developer&gt;
+        </div>
+        <div class="hidden md:block absolute top-40 right-20 text-cyan-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 1s;">
+            function() { return 'projects'; }
+        </div>
+        <div class="hidden md:block absolute bottom-40 left-20 text-blue-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 2s;">
+            &lt;/developer&gt;
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 id="projects-title" data-translate="projects.title"
+                        class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text">Projetos em
+                        Destaque</h2>
+                    <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-4 sm:mb-6"></div>
+                    <p id="projects-subtitle" data-translate="projects.subtitle"
+                        class="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+                        Conheça alguns dos projetos que desenvolvi, demonstrando minhas habilidades técnicas e
+                        capacidade de criar soluções inovadoras.
+                    </p>
+                </div>
+
+                <!-- Projects Carousel -->
+                <div class="relative">
+                    <!-- Carousel Container -->
+                    <div id="projects-carousel" class="overflow-hidden">
+                        <div id="projects-track" class="flex transition-transform duration-500 ease-in-out">
+                            <!-- Project 1 -->
+                            <div class="w-full md:w-1/3 flex-shrink-0 px-2">
+                                <div
+                                    class="bg-slate-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 project-card max-w-md mx-auto">
+                                    <div class="p-6 sm:p-8">
+                                        <div
+                                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                                            <i class="fa-solid fa-plug text-xl sm:text-2xl text-white"></i>
+                                        </div>
+                                        <h3 id="project1-title" data-translate="projects.project1.title"
+                                            class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-blue-400">APIs de
+                                            Integração</h3>
+                                        <p id="project1-desc" data-translate="projects.project1.description"
+                                            class="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed">
+                                            Desenvolvimento de APIs robustas utilizando Node.js, PHP e Python para
+                                            integração segura entre sistemas corporativos.
+                                        </p>
+
+                                        <div class="mb-4 sm:mb-6">
+                                            <h4
+                                                data-translate="projects.project1.technologies" class="text-xs sm:text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2 sm:mb-3">
+                                                Tecnologias</h4>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">Node.js</span>
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">PHP</span>
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">Python</span>
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">MySQL</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="space-y-2 mb-4">
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-shield-halved w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project1.features.1">Segurança</span>
+                                            </div>
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-expand-arrows-alt w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project1.features.2">Escalabilidade</span>
+                                            </div>
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-tachometer-alt w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project1.features.3">Performance</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <a href="#"
+                                                class="flex-1 inline-flex items-center justify-center px-3 py-2 bg-slate-700/50 hover:bg-slate-600/50 text-gray-300 hover:text-white rounded-lg transition-all duration-300 text-xs sm:text-sm">
+                                                <i class="fab fa-github mr-2"></i>
+                                                Código
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project 2 -->
+                            <div class="w-full md:w-1/3 flex-shrink-0 px-2">
+                                <div
+                                    class="bg-slate-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 project-card max-w-md mx-auto">
+                                    <div class="p-6 sm:p-8">
+                                        <div
+                                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                                            <i class="fa-solid fa-spider text-xl sm:text-2xl text-white"></i>
+                                        </div>
+                                        <h3 data-translate="projects.project2.title"
+                                            class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-blue-400">Sistema de
+                                            Web Scraping</h3>
+                                        <p data-translate="projects.project2.description"
+                                            class="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed">
+                                            Implementação de solução automatizada para coleta e processamento de dados
+                                            com Python, otimizando processos de negócio.
+                                        </p>
+
+                                        <div class="mb-4 sm:mb-6">
+                                            <h4
+                                                data-translate="projects.project1.technologies" class="text-xs sm:text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2 sm:mb-3">
+                                                Tecnologias</h4>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs sm:text-sm border border-cyan-500/30">Python</span>
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs sm:text-sm border border-cyan-500/30">APIs</span>
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs sm:text-sm border border-cyan-500/30">MySQL</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="space-y-2 mb-4">
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-robot w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project2.features.1">Automação</span>
+                                            </div>
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-exchange-alt w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project2.features.2">ETL</span>
+                                            </div>
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-check-circle w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project2.features.3">Integridade de Dados</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <a href="#"
+                                                class="flex-1 inline-flex items-center justify-center px-3 py-2 bg-slate-700/50 hover:bg-slate-600/50 text-gray-300 hover:text-white rounded-lg transition-all duration-300 text-xs sm:text-sm">
+                                                <i class="fab fa-github mr-2"></i>
+                                                Código
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project 3 -->
+                            <div class="w-full md:w-1/3 flex-shrink-0 px-2">
+                                <div
+                                    class="bg-slate-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 project-card max-w-md mx-auto">
+                                    <div class="p-6 sm:p-8">
+                                        <div
+                                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                                            <i class="fa-solid fa-chart-bar text-xl sm:text-2xl text-white"></i>
+                                        </div>
+                                        <h3 data-translate="projects.project3.title"
+                                            class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-blue-400">Dashboards
+                                            Analíticos</h3>
+                                        <p data-translate="projects.project3.description"
+                                            class="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 leading-relaxed">
+                                            Criação de relatórios interativos e dashboards em Power BI integrados com
+                                            SQL para suporte à decisão estratégica.
+                                        </p>
+
+                                        <div class="mb-4 sm:mb-6">
+                                            <h4
+                                                data-translate="projects.project1.technologies" class="text-xs sm:text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2 sm:mb-3">
+                                                Tecnologias</h4>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-xs sm:text-sm border border-yellow-500/30">Power
+                                                    BI</span>
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-xs sm:text-sm border border-yellow-500/30">SQL</span>
+                                                <span
+                                                    class="px-2 sm:px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-xs sm:text-sm border border-yellow-500/30">Excel</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="space-y-2 mb-4">
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-eye w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project3.features.1" >Visualização</span>
+                                            </div>
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-brain w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project3.features.2">BI</span>
+                                            </div>
+                                            <div class="flex items-center text-xs sm:text-sm text-gray-400">
+                                                <i class="fa-solid fa-lightbulb w-4 mr-2 text-green-400"></i>
+                                                <span data-translate="projects.project3.features.3">Tomada de Decisão</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex gap-2">
+                                            <a href="#"
+                                                class="flex-1 inline-flex items-center justify-center px-3 py-2 bg-slate-700/50 hover:bg-slate-600/50 text-gray-300 hover:text-white rounded-lg transition-all duration-300 text-xs sm:text-sm">
+                                                <i class="fab fa-github mr-2"></i>
+                                                Código
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <button id="prev-btn"
+                        class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-slate-800/80 hover:bg-slate-700/80 text-gray-300 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 z-10">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button id="next-btn"
+                        class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-slate-800/80 hover:bg-slate-700/80 text-gray-300 hover:text-white rounded-full flex items-center justify-center transition-all duration-300 z-10">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Indicators -->
+                    <div class="flex justify-center mt-8 space-x-2">
+                        <button
+                            class="carousel-indicator w-3 h-3 rounded-full bg-slate-600 hover:bg-slate-500 transition-all duration-300 active"
+                            data-slide="0"></button>
+                        <button
+                            class="carousel-indicator w-3 h-3 rounded-full bg-slate-600 hover:bg-slate-500 transition-all duration-300 md:hidden"
+                            data-slide="1"></button>
+                        <button
+                            class="carousel-indicator w-3 h-3 rounded-full bg-slate-600 hover:bg-slate-500 transition-all duration-300 md:hidden"
+                            data-slide="2"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="habilidades" class="py-12 sm:py-16 md:py-20 bg-slate-900 relative">
+
+        <!-- Floating Code Elements - Hidden on mobile -->
+        <div class="hidden md:block absolute top-20 left-10 text-blue-400/30 code-font text-sm floating-animation">
+            &lt;developer&gt;
+        </div>
+        <div class="hidden md:block absolute top-40 right-20 text-cyan-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 1s;">
+            function() { return 'skills'; }
+        </div>
+        <div class="hidden md:block absolute bottom-40 left-20 text-blue-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 2s;">
+            &lt;/developer&gt;
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 id="skills-title" data-translate="skills.title"
+                        class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text">Habilidades
+                        Técnicas</h2>
+                    <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-4 sm:mb-6"></div>
+                    <p data-translate="skills.subtitle"
+                        class="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+                        Um conjunto abrangente de tecnologias e ferramentas que domino para criar soluções robustas e
+                        escaláveis.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+                    <!-- Languages & Frameworks -->
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 skill-card">
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                            <i class="fa-solid fa-code text-xl sm:text-2xl text-white"></i>
+                        </div>
+                        <h3 data-translate="skills.categories.backend"
+                            class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-blue-400">Linguagens &amp; Frameworks
+                        </h3>
+                        <div class="space-y-2 sm:space-y-3">
+
+                            <div
+                                class="flex items-center text-gray-200 hover:text-yellow-400 transition-colors duration-200">
+                                <i class="fab fa-python text-yellow-400 mr-3 text-xl w-6"></i>
+                                <span>Python</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-purple-400 transition-colors duration-200">
+                                <i class="fab fa-php text-purple-400 mr-3 text-xl w-6"></i>
+                                <span>PHP</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-red-500 transition-colors duration-200">
+                                <i class="fab fa-laravel text-red-500 mr-3 text-xl w-6"></i>
+                                <span>Laravel</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-yellow-300 transition-colors duration-200">
+                                <i class="fab fa-js text-yellow-300 mr-3 text-xl w-6"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-green-400 transition-colors duration-200">
+                                <i class="fab fa-node-js text-green-400 mr-3 text-xl w-6"></i>
+                                <span>Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Databases -->
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 skill-card">
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                            <i class="fa-solid fa-database text-xl sm:text-2xl text-white"></i>
+                        </div>
+                        <h3 data-translate="skills.categories.database"
+                            class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-blue-400">Bancos de Dados</h3>
+                        <div class="space-y-2 sm:space-y-3">
+                            <div
+                                class="flex items-center text-gray-200 hover:text-orange-400 transition-colors duration-200">
+                                <i class="fas fa-database text-orange-400 mr-3 text-xl w-6"></i>
+                                <span>MySQL</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-blue-500 transition-colors duration-200">
+                                <i class="fas fa-server text-blue-500 mr-3 text-xl w-6"></i>
+                                <span>Microsoft SQL Server</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-indigo-400 transition-colors duration-200">
+                                <i class="fas fa-database text-indigo-400 mr-3 text-xl w-6"></i>
+                                <span>PostgreSQL</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-gray-400 transition-colors duration-200">
+                                <i class="fas fa-database text-gray-400 mr-3 text-xl w-6"></i>
+                                <span>SQLite</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Tools & Infrastructure -->
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 skill-card">
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                            <i class="fa-solid fa-tools text-xl sm:text-2xl text-white"></i>
+                        </div>
+                        <h3 data-translate="skills.categories.tools"
+                            class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-blue-400">Ferramentas &amp;
+                            Infraestrutura</h3>
+                        <div class="space-y-2 sm:space-y-3">
+                            <div
+                                class="flex items-center text-gray-200 hover:text-yellow-500 transition-colors duration-200">
+                                <i class="fas fa-chart-pie text-yellow-500 mr-3 text-xl w-6"></i>
+                                <span>Power BI</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-green-500 transition-colors duration-200">
+                                <i class="fas fa-file-excel text-green-500 mr-3 text-xl w-6"></i>
+                                <span>Excel</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-blue-400 transition-colors duration-200">
+                                <i class="fab fa-wordpress text-blue-400 mr-3 text-xl w-6"></i>
+                                <span>WordPress</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-gray-300 transition-colors duration-200">
+                                <i class="fab fa-linux text-gray-300 mr-3 text-xl w-6"></i>
+                                <span>Linux</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-blue-500 transition-colors duration-200">
+                                <i class="fab fa-windows text-blue-500 mr-3 text-xl w-6"></i>
+                                <span>Windows Server</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Techniques & Methodologies -->
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 skill-card">
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                            <i class="fa-solid fa-cogs text-xl sm:text-2xl text-white"></i>
+                        </div>
+                        <h3 data-translate="skills.categories.others"
+                            class="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-blue-400">Técnicas &amp; Metodologias
+                        </h3>
+                        <div class="space-y-2 sm:space-y-3">
+                            <div
+                                class="flex items-center text-gray-200 hover:text-primary transition-colors duration-200">
+                                <i class="fas fa-link text-primary mr-3 text-xl w-6"></i>
+                                <span>APIs REST</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-secondary transition-colors duration-200">
+                                <i class="fas fa-code-branch text-secondary mr-3 text-xl w-6"></i>
+                                <span>Git &amp; Versionamento</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-green-400 transition-colors duration-200">
+                                <i class="fas fa-project-diagram text-green-400 mr-3 text-xl w-6"></i>
+                                <span>Metodologias Ágeis</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-cyan-400 transition-colors duration-200">
+                                <i class="fas fa-spider text-cyan-400 mr-3 text-xl w-6"></i>
+                                <span>Web Scraping</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-blue-300 transition-colors duration-200">
+                                <i class="fas fa-exchange-alt text-blue-300 mr-3 text-xl w-6"></i>
+                                <span>ETL</span>
+                            </div>
+                            <div
+                                class="flex items-center text-gray-200 hover:text-yellow-400 transition-colors duration-200">
+                                <i class="fas fa-cube text-yellow-400 mr-3 text-xl w-6"></i>
+                                <span>POO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experiencia" class="py-12 sm:py-16 md:py-20 bg-slate-950 relative">
+
+        <!-- Floating Code Elements - Hidden on mobile -->
+        <div class="hidden md:block absolute top-20 left-10 text-blue-400/30 code-font text-sm floating-animation">
+            &lt;developer&gt;
+        </div>
+        <div class="hidden md:block absolute top-40 right-20 text-cyan-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 1s;">
+            function() { return 'experience'; }
+        </div>
+        <div class="hidden md:block absolute bottom-40 left-20 text-blue-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 2s;">
+            &lt;/developer&gt;
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 id="experience-title" data-translate="experience.title"
+                        class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text">Experiência
+                        Profissional</h2>
+                    <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-4 sm:mb-6"></div>
+                    <p data-translate="experience.subtitle"
+                        class="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+                        Minha trajetória profissional demonstra crescimento constante e especialização em
+                        desenvolvimento backend.
+                    </p>
+                </div>
+
+                <!-- Timeline -->
+                <div class="relative">
+                    <div
+                        class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-cyan-500 transform md:-translate-x-1/2">
+                    </div>
+
+                    <!-- Experience 1 -->
+                    <div class="relative flex items-center mb-8 sm:mb-12">
+                        <div
+                            class="absolute left-4 md:left-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded-full transform md:-translate-x-1/2 z-10">
+                        </div>
+                        <div class="ml-10 sm:ml-12 md:ml-0 md:w-1/2 md:pr-8">
+                            <div
+                                class="bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300">
+                                <div
+                                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 gap-2">
+                                    <h3 id="experience-junior-title" data-translate="experience.jobs.juniorDev.title" class="text-xl sm:text-2xl font-bold text-blue-400">Desenvolvedor Júnior</h3>
+                                    <!-- <span class="text-xs sm:text-sm text-gray-400 bg-slate-800 px-2 sm:px-3 py-1 rounded-full self-start">Atual</span> -->
+                                </div>
+                                <h4 id="experience-junior-company" data-translate="experience.jobs.juniorDev.company" class="text-base sm:text-lg font-semibold text-gray-300 mb-2">DeltaFox Consultoria
+                                </h4>
+                                <p id="experience-junior-period" data-translate="experience.jobs.juniorDev.period" class="text-sm sm:text-base text-cyan-400 mb-3 sm:mb-4">Junho 2023 - Setembro 2025 (2
+                                    anos 4 meses)</p>
+
+                                <div class="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-junior-resp1" data-translate="experience.jobs.juniorDev.responsibilities.0" class="text-sm sm:text-base text-gray-300">Manutenção e otimização de site
+                                            desenvolvido em WordPress, assegurando desempenho e usabilidade</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-junior-resp2" data-translate="experience.jobs.juniorDev.responsibilities.1" class="text-sm sm:text-base text-gray-300">Desenvolvimento de sistemas web
+                                            utilizando PHP e JavaScript, com foco em funcionalidades robustas e
+                                            escaláveis</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-junior-resp3" data-translate="experience.jobs.juniorDev.responsibilities.2" class="text-sm sm:text-base text-gray-300">Criação e manutenção de APIs
+                                            utilizando Node.js, PHP e Python, garantindo integração segura e eficiente
+                                            entre sistemas</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-junior-resp4" data-translate="experience.jobs.juniorDev.responsibilities.3" class="text-sm sm:text-base text-gray-300">Implementação de web scraping com
+                                            Python para coleta automatizada e processamento de dados</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-junior-resp5" data-translate="experience.jobs.juniorDev.responsibilities.4" class="text-sm sm:text-base text-gray-300">Administração e otimização de
+                                            bancos de dados MySQL para garantir integridade e desempenho</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-junior-resp6" data-translate="experience.jobs.juniorDev.responsibilities.5" class="text-sm sm:text-base text-gray-300">Gerenciamento de servidores Linux
+                                            e Windows, assegurando alta disponibilidade e segurança dos ambientes</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-junior-resp7" data-translate="experience.jobs.juniorDev.responsibilities.6" class="text-sm sm:text-base text-gray-300">Desenvolvimento de relatórios
+                                            analíticos e dashboards interativos utilizando Power BI para suporte à
+                                            tomada de decisão</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">PHP</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">JavaScript</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">Node.js</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">Python</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">MySQL</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">Linux</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">WordPress</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs sm:text-sm border border-blue-500/30">Power BI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience 2 -->
+                    <div class="relative flex items-center mb-8 sm:mb-12 md:justify-end">
+                        <div
+                            class="absolute left-4 md:left-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-cyan-500 rounded-full transform md:-translate-x-1/2 z-10">
+                        </div>
+                        <div class="ml-10 sm:ml-12 md:ml-0 md:w-1/2 md:pl-8">
+                            <div
+                                class="bg-slate-900/50 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300">
+                                <h3 id="experience-intern-title" data-translate="experience.jobs.intern.title" class="text-xl sm:text-2xl font-bold text-cyan-400 mb-2">Estagiário</h3>
+                                <h4 id="experience-intern-company" data-translate="experience.jobs.intern.company" class="text-base sm:text-lg font-semibold text-gray-300 mb-2">DeltaFox Consultoria
+                                </h4>
+                                <p id="experience-intern-period" data-translate="experience.jobs.intern.period" class="text-sm sm:text-base text-blue-400 mb-3 sm:mb-4">Fevereiro 2022 - Junho 2023
+                                    (1 ano 5 meses)</p>
+
+                                <div class="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-intern-resp1" data-translate="experience.jobs.intern.responsibilities.0" class="text-sm sm:text-base text-gray-300">Manutenção e atualização de site
+                                            desenvolvido em WordPress, garantindo a funcionalidade e desempenho</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-intern-resp2" data-translate="experience.jobs.intern.responsibilities.1" class="text-sm sm:text-base text-gray-300">Desenvolvimento e manutenção de
+                                            APIs utilizando Node.js, PHP e Python, focando em integridade, segurança e
+                                            eficiência</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i
+                                            class="fa-solid fa-check-circle text-green-400 mt-1 mr-2 sm:mr-3 text-xs sm:text-sm flex-shrink-0"></i>
+                                        <p id="experience-intern-resp3" data-translate="experience.jobs.intern.responsibilities.2" class="text-sm sm:text-base text-gray-300">Implementação de web scraping com
+                                            Python para coleta automatizada de dados e integração com sistemas internos
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs sm:text-sm border border-cyan-500/30">WordPress</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs sm:text-sm border border-cyan-500/30">Node.js</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs sm:text-sm border border-cyan-500/30">PHP</span>
+                                    <span
+                                        class="px-2 sm:px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs sm:text-sm border border-cyan-500/30">Python</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience 3 -->
+                    <div class="relative flex items-center mb-12">
+                        <div
+                            class="absolute left-4 md:left-1/2 w-4 h-4 bg-blue-500 rounded-full transform md:-translate-x-1/2 z-10">
+                        </div>
+                        <div class="ml-12 md:ml-0 md:w-1/2 md:pr-8">
+                            <div
+                                class="bg-slate-900/50 backdrop-blur-sm p-8 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300">
+                                <h3 id="experience-analyst-title" data-translate="experience.jobs.dataAnalyst.title" class="text-2xl font-bold text-blue-400 mb-2">Assistente de Análise de Dados</h3>
+                                <h4 id="experience-analyst-company" data-translate="experience.jobs.dataAnalyst.company" class="text-lg font-semibold text-gray-300 mb-2">Grupo Verreschi</h4>
+                                <p id="experience-analyst-period" data-translate="experience.jobs.dataAnalyst.period" class="text-cyan-400 mb-4">Setembro 2021 - Fevereiro 2022 (6 meses)</p>
+
+                                <div class="space-y-3 mb-6">
+                                    <div class="flex items-start">
+                                        <i class="fa-solid fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                        <p id="experience-analyst-resp1" data-translate="experience.jobs.dataAnalyst.responsibilities.0" class="text-gray-300">Realização de análises de dados aprofundadas e
+                                            desenvolvimento de relatórios precisos e visualmente impactantes utilizando
+                                            Excel e Power BI</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fa-solid fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                        <p id="experience-analyst-resp2" data-translate="experience.jobs.dataAnalyst.responsibilities.1" class="text-gray-300">Integração eficiente a bancos de dados SQL para suporte
+                                            a tomadas de decisão estratégicas</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm border border-yellow-500/30">Excel</span>
+                                    <span
+                                        class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm border border-yellow-500/30">Power
+                                        BI</span>
+                                    <span
+                                        class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm border border-yellow-500/30">SQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience 4 -->
+                    <div class="relative flex items-center mb-12 md:justify-end">
+                        <div
+                            class="absolute left-4 md:left-1/2 w-4 h-4 bg-cyan-500 rounded-full transform md:-translate-x-1/2 z-10">
+                        </div>
+                        <div class="ml-12 md:ml-0 md:w-1/2 md:pl-8">
+                            <div
+                                class="bg-slate-900/50 backdrop-blur-sm p-8 rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300">
+                                <h3 id="experience-mis-title" data-translate="experience.jobs.misIntern.title" class="text-2xl font-bold text-cyan-400 mb-2">Estagiário de MIS</h3>
+                                <h4 id="experience-mis-company" data-translate="experience.jobs.misIntern.company" class="text-lg font-semibold text-gray-300 mb-2">Grupo Verreschi</h4>
+                                <p id="experience-mis-period" data-translate="experience.jobs.misIntern.period" class="text-blue-400 mb-4">Julho 2021 - Setembro 2021 (3 meses)</p>
+
+                                <div class="space-y-3 mb-6">
+                                    <div class="flex items-start">
+                                        <i class="fa-solid fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                        <p id="experience-mis-resp1" data-translate="experience.jobs.misIntern.responsibilities.0" class="text-gray-300">Realização de análises de dados detalhadas e
+                                            desenvolvimento de relatórios de alta qualidade utilizando Excel e Power BI
+                                        </p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fa-solid fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                        <p id="experience-mis-resp2" data-translate="experience.jobs.misIntern.responsibilities.1" class="text-gray-300">Integração direta a bancos de dados SQL para garantir
+                                            precisão e eficiência na apresentação das informações</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Excel</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">Power
+                                        BI</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">SQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="educacao" class="py-12 sm:py-16 md:py-20 bg-slate-900 relative">
+
+        <!-- Floating Code Elements - Hidden on mobile -->
+        <div class="hidden md:block absolute top-20 left-10 text-blue-400/30 code-font text-sm floating-animation">
+            &lt;developer&gt;
+        </div>
+        <div class="hidden md:block absolute top-40 right-20 text-cyan-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 1s;">
+            function() { return 'education'; }
+        </div>
+        <div class="hidden md:block absolute bottom-40 left-20 text-blue-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 2s;">
+            &lt;/developer&gt;
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 id="education-title" data-translate="education.title"
+                        class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text">Formação &amp;
+                        Certificações</h2>
+                    <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 sm:gap-12">
+                    <!-- Education -->
+                    <div class="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-slate-700/50">
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fa-solid fa-graduation-cap text-2xl text-white"></i>
+                            </div>
+                            <div>
+                                <h3 data-translate="education.academic.title" class="text-2xl font-bold text-blue-400">
+                                    Formação Acadêmica</h3>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900/50 p-6 rounded-lg border border-slate-700/30">
+                            <h4 data-translate="education.academic.degree"
+                                class="text-xl font-semibold text-gray-200 mb-2">Bacharelado em Sistemas de Informação
+                            </h4>
+                            <p data-translate="education.academic.university" class="text-cyan-400 mb-2">Universidade
+                                Santa Cecília</p>
+                            <p data-translate="education.academic.period" class="text-gray-400">2020 - 2023</p>
+                        </div>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-slate-700/50">
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fa-solid fa-certificate text-2xl text-white"></i>
+                            </div>
+                            <div>
+                                <h3 data-translate="education.certifications.title"
+                                    class="text-2xl font-bold text-blue-400">Certificações</h3>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <!-- Primeiras 5 certificações (sempre visíveis) -->
+                            <div class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                <i class="fa-solid fa-award text-blue-400 mr-3"></i>
+                                <span id="cert-1" data-translate="education.certifications.list.0" class="text-gray-300">Descubra o Power BI</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                <i class="fa-solid fa-award text-cyan-400 mr-3"></i>
+                                <span id="cert-2" data-translate="education.certifications.list.1" class="text-gray-300">White Belt</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                <i class="fa-solid fa-award text-blue-400 mr-3"></i>
+                                <span id="cert-3" data-translate="education.certifications.list.2" class="text-gray-300">Administrando Banco de Dados</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                <i class="fa-solid fa-award text-cyan-400 mr-3"></i>
+                                <span id="cert-4" data-translate="education.certifications.list.3" class="text-gray-300">Implementação de Banco de Dados</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                <i class="fa-solid fa-award text-blue-400 mr-3"></i>
+                                <span id="cert-5" data-translate="education.certifications.list.4" class="text-gray-300">Node.js</span>
+                            </div>
+
+                            <!-- Certificações adicionais (inicialmente ocultas) -->
+                            <div id="additional-certifications" class="hidden space-y-3">
+                                <div
+                                    class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                    <i class="fa-solid fa-award text-cyan-400 mr-3"></i>
+                                    <span id="cert-6" data-translate="education.certifications.list.5" class="text-gray-300">Criando projeto com interface gráfica Python</span>
+                                </div>
+                                <div
+                                    class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                    <i class="fa-solid fa-award text-blue-400 mr-3"></i>
+                                    <span id="cert-7" data-translate="education.certifications.list.6" class="text-gray-300">Estratégia de Negócios</span>
+                                </div>
+                                <div
+                                    class="flex items-center p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
+                                    <i class="fa-solid fa-award text-cyan-400 mr-3"></i>
+                                    <span id="cert-8" data-translate="education.certifications.list.7" class="text-gray-300">Inovando com CSS</span>
+                                </div>
+                            </div>
+
+                            <!-- Botão Ver mais/Ver menos -->
+                            <div class="pt-3">
+                                <button id="toggle-certifications"
+                                    class="w-full px-4 py-2 bg-slate-700/50 hover:bg-slate-600/50 text-gray-300 hover:text-white rounded-lg transition-all duration-300 flex items-center justify-center">
+                                    <i class="fa-solid fa-chevron-down mr-2" id="certifications-icon"></i>
+                                    <span id="certifications-text"
+                                        data-translate="education.certifications.showMore">Ver mais</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-12 sm:py-16 md:py-20 bg-slate-900 relative">
+
+        <!-- Floating Code Elements - Hidden on mobile -->
+        <div class="hidden md:block absolute top-20 left-10 text-blue-400/30 code-font text-sm floating-animation">
+            &lt;developer&gt;
+        </div>
+        <div class="hidden md:block absolute top-40 right-20 text-cyan-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 1s;">
+            function() { return 'contact'; }
+        </div>
+        <div class="hidden md:block absolute bottom-40 left-20 text-blue-400/30 code-font text-sm floating-animation"
+            style="animation-delay: 2s;">
+            &lt;/developer&gt;
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h2 id="contact-title" data-translate="contact.title"
+                        class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 gradient-text">Entre em Contato
+                    </h2>
+                    <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-4 sm:mb-6"></div>
+                    <p data-translate="contact.subtitle"
+                        class="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+                        Vamos conversar sobre como posso contribuir para o sucesso do seu próximo projeto.
+                    </p>
+                </div>
+
+                <div class="max-w-2xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <div>
+                            <h3 data-translate="contact.subtitle2" class="text-2xl font-bold text-blue-400 mb-6 text-center">Informações de Contato</h3>
+
+                            <div class="space-y-6">
+                                <a href="mailto:guilhermelopes97@outlook.com"
+                                    class="flex items-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fa-solid fa-envelope text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">Email</p>
+                                        <p class="text-gray-200 font-semibold">guilhermelopes97@outlook.com</p>
+                                    </div>
+                                </a>
+
+                                <a href="https://wa.me/5513996659911"
+                                    class="flex items-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer"
+                                    rel="noopener noreferrer" target="_blank">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fa-brands fa-whatsapp text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">WhatsApp</p>
+                                        <p class="text-gray-200 font-semibold">(13) 99665-9911</p>
+                                    </div>
+                                </a>
+
+                                <a href="https://www.linkedin.com/in/guilherme-lopes-de-oliveira/"
+                                    class="flex items-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer"
+                                    rel="noopener noreferrer" target="_blank">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fa-brands fa-linkedin text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">LinkedIn</p>
+                                        <p class="text-gray-200 font-semibold">Guilherme Lopes de Oliveira</p>
+                                    </div>
+                                </a>
+
+                                <a href="https://github.com/Guiilopes97"
+                                    class="flex items-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 group cursor-pointer"
+                                    rel="noopener noreferrer" target="_blank">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fa-brands fa-github text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-400 text-sm">GitHub</p>
+                                        <p class="text-gray-200 font-semibold">@Guiilopes97</p>
+                                    </div>
+                                </a>
+
+                                <div
+                                    class="flex items-center p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fa-solid fa-location-dot text-white"></i>
+                                    </div>
+                                    <div>
+                                        <p data-translate="hero.locationText" class="text-gray-400 text-sm">Localização</p>
+                                        <p data-translate="hero.location" class="text-gray-200 font-semibold">Guarujá, São Paulo, Brasil</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="py-12 bg-slate-950 border-t border-slate-800/50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="mb-6 md:mb-0">
+                        <div class="text-3xl font-bold gradient-text mb-2">GL</div>
+                        <p class="text-gray-400">Desenvolvedor Backend Especialista</p>
+                    </div>
+
+                    <div class="flex space-x-6">
+                        <a href="mailto:guilhermelopes97@outlook.com"
+                            class="w-12 h-12 bg-slate-800/50 rounded-lg flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-500/20 transition-all duration-300 cursor-pointer">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/5513996659911"
+                            class="w-12 h-12 bg-slate-800/50 rounded-lg flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-500/20 transition-all duration-300 cursor-pointer"
+                            rel="noopener noreferrer" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/guilherme-lopes-de-oliveira/"
+                            class="w-12 h-12 bg-slate-800/50 rounded-lg flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-500/20 transition-all duration-300 cursor-pointer"
+                            rel="noopener noreferrer" target="_blank">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Guiilopes97"
+                            class="w-12 h-12 bg-slate-800/50 rounded-lg flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-500/20 transition-all duration-300 cursor-pointer"
+                            rel="noopener noreferrer" target="_blank">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-800/50 mt-8 pt-8 text-center">
+                    <p class="text-gray-400">
+                        © 2025 Guilherme Lopes. Todos os direitos reservados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="translations.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('bg-slate-950/95');
+                header.classList.remove('bg-slate-950/90');
+            } else {
+                header.classList.add('bg-slate-950/90');
+                header.classList.remove('bg-slate-950/95');
+            }
+        });
+
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for fade-in animation
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Toggle certifications visibility
+        const toggleCertificationsBtn = document.getElementById('toggle-certifications');
+        const additionalCertifications = document.getElementById('additional-certifications');
+        const certificationsIcon = document.getElementById('certifications-icon');
+        const certificationsText = document.getElementById('certifications-text');
+
+        if (toggleCertificationsBtn && additionalCertifications) {
+            toggleCertificationsBtn.addEventListener('click', () => {
+                const isHidden = additionalCertifications.classList.contains('hidden');
+
+                if (isHidden) {
+                    // Show additional certifications
+                    additionalCertifications.classList.remove('hidden');
+                    certificationsIcon.classList.remove('fa-chevron-down');
+                    certificationsIcon.classList.add('fa-chevron-up');
+                    // Usar tradução para "Ver menos"
+                    if (typeof getTranslation === 'function') {
+                        certificationsText.textContent = getTranslation('education.certifications.showLess', currentLanguage || 'pt');
+                    } else {
+                        certificationsText.textContent = 'Ver menos';
+                    }
+                } else {
+                    // Hide additional certifications
+                    additionalCertifications.classList.add('hidden');
+                    certificationsIcon.classList.remove('fa-chevron-up');
+                    certificationsIcon.classList.add('fa-chevron-down');
+                    // Usar tradução para "Ver mais"
+                    if (typeof getTranslation === 'function') {
+                        certificationsText.textContent = getTranslation('education.certifications.showMore', currentLanguage || 'pt');
+                    } else {
+                        certificationsText.textContent = 'Ver mais';
+                    }
+                }
+            });
+        }
+
+        // Projects Carousel
+        let currentSlide = 0;
+        const track = document.getElementById('projects-track');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function getTotalSlides() {
+            // Em mobile: 3 slides (1 por vez)
+            // Em desktop: 1 slide (3 projetos por vez)
+            return window.innerWidth >= 768 ? 1 : 3;
+        }
+
+        function getSlideWidth() {
+            // Em mobile: 100% (1 projeto por vez)
+            // Em desktop: 100% (3 projetos por vez)
+            return window.innerWidth >= 768 ? 100 : 100;
+        }
+
+        function updateCarousel() {
+            const totalSlides = getTotalSlides();
+            const slideWidth = getSlideWidth();
+            const translateX = -currentSlide * slideWidth;
+            track.style.transform = `translateX(${translateX}%)`;
+
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+
+            // Hide/show navigation buttons based on screen size
+            if (window.innerWidth >= 768) {
+                // Desktop: hide navigation buttons (all projects visible)
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+            } else {
+                // Mobile: show navigation buttons
+                if (prevBtn) prevBtn.style.display = 'flex';
+                if (nextBtn) nextBtn.style.display = 'flex';
+            }
+        }
+
+        function nextSlide() {
+            const totalSlides = getTotalSlides();
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            const totalSlides = getTotalSlides();
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // Event listeners
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+        // Indicator clicks
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+
+        // Auto-play (optional)
+        let autoPlayInterval;
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000); // 5 seconds
+        }
+
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        // Initialize carousel
+        updateCarousel();
+
+        // Start auto-play
+        startAutoPlay();
+
+        // Pause auto-play on hover
+        const carousel = document.getElementById('projects-carousel');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', stopAutoPlay);
+            carousel.addEventListener('mouseleave', startAutoPlay);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            currentSlide = 0; // Reset to first slide
+            updateCarousel();
+        });
+
+        // Language Selector
+        const languageBtn = document.getElementById('language-btn');
+        const languageDropdown = document.getElementById('language-dropdown');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const mobileLanguageOptions = document.querySelectorAll('.mobile-language-option');
+
+        let currentLanguage = 'pt';
+        let isInitializing = false;
+
+        // Toggle dropdown
+        if (languageBtn && languageDropdown) {
+            languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('hidden');
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            if (languageDropdown) {
+                languageDropdown.classList.add('hidden');
+            }
+        });
+
+        // Language change function
+        function changeLanguage(lang) {
+            if (isInitializing && lang !== 'pt') {
+                console.log('Preventing language change during initialization');
+                return;
+            }
+
+            currentLanguage = lang;
+            console.log('Changing language to:', lang);
+
+            // Update button text
+            const code = lang === 'pt' ? 'PT' : 'EN';
+            const flagSrc = lang === 'pt' ? 'Flag_of_Brazil.png' : 'Flag_of_the_United_States.svg';
+            const flagAlt = lang === 'pt' ? 'Brasil' : 'Estados Unidos';
+
+            if (languageBtn) {
+                languageBtn.innerHTML = `
+            <img src="${flagSrc}" alt="${flagAlt}" class="w-6 h-4 rounded-sm object-cover">
+            <span class="text-sm">${code}</span>
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+        `;
+            }
+
+            // Update active states
+            languageOptions.forEach(option => {
+                if (option.dataset.lang === lang) {
+                    option.classList.add('bg-blue-500/20', 'text-blue-400');
+                    option.classList.remove('text-gray-300');
+                } else {
+                    option.classList.remove('bg-blue-500/20', 'text-blue-400');
+                    option.classList.add('text-gray-300');
+                }
+            });
+
+            mobileLanguageOptions.forEach(option => {
+                if (option.dataset.lang === lang) {
+                    option.classList.add('bg-blue-500/20', 'text-blue-400');
+                    option.classList.remove('text-gray-300');
+                } else {
+                    option.classList.remove('bg-blue-500/20', 'text-blue-400');
+                    option.classList.add('text-gray-300');
+                }
+            });
+
+            // Close dropdown
+            if (languageDropdown) {
+                languageDropdown.classList.add('hidden');
+            }
+
+            // Translate the page
+            if (typeof translatePage === 'function') {
+                translatePage(lang);
+            }
+
+            // Save language preference
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        // Desktop language options
+        languageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                changeLanguage(option.dataset.lang);
+            });
+        });
+
+        // Mobile language options
+        mobileLanguageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                changeLanguage(option.dataset.lang);
+            });
+        });
+
+        // Initialize language selector when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM loaded, initializing language...');
+            isInitializing = true;
+
+            // Force Portuguese on first load and clear any existing settings
+            localStorage.setItem('selectedLanguage', 'pt');
+            const languageToUse = 'pt';
+
+            // Wait a bit for translations.js to load
+            setTimeout(() => {
+                console.log('Executing language initialization...');
+
+                if (typeof changeLanguage === 'function') {
+                    changeLanguage(languageToUse);
+                }
+
+                if (typeof translatePage === 'function') {
+                    translatePage(languageToUse);
+                } else {
+                    console.error('translatePage function not found');
+                }
+
+                // Allow language changes after initialization
+                setTimeout(() => {
+                    isInitializing = false;
+                    console.log('Language initialization complete');
+                }, 500);
+            }, 100);
+        });
+    </script>
+
+
+</body>
+
+</html>
