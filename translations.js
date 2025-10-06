@@ -8,7 +8,8 @@ const translations = {
             projetos: "Projetos",
             habilidades: "Habilidades",
             experiencia: "Experiência",
-            contato: "Contato"
+            contato: "Contato",
+            idioma: "Idioma"
         },
         
         // Hero Section
@@ -204,7 +205,8 @@ const translations = {
             projetos: "Projects",
             habilidades: "Skills",
             experiencia: "Experience",
-            contato: "Contact"
+            contato: "Contact",
+            idioma: "Language"
         },
         
         // Hero Section
