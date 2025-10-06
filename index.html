@@ -104,7 +104,15 @@
         }
 
         .mobile-menu.active {
-            max-height: 400px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        /* Garantir que as imagens das bandeiras sejam exibidas */
+        .mobile-language-option img {
+            display: inline-block !important;
+            min-width: 24px;
+            min-height: 16px;
         }
 
         /* Carousel Indicators */
@@ -210,21 +218,21 @@
                         class="text-gray-300 hover:text-blue-400 transition-colors duration-300 cursor-pointer py-2">Contato</a>
 
                     <!-- Mobile Language Selector -->
-                    <div class="pt-4 border-t border-slate-700/50">
-                        <div class="text-xs text-gray-400 uppercase tracking-wider mb-2">Idioma</div>
-                        <div class="flex space-x-2">
+                    <div class="pt-4 pb-2 border-t border-slate-700/50">
+                        <div class="text-xs text-gray-400 uppercase tracking-wider mb-3">Idioma</div>
+                        <div class="flex gap-3">
                             <button
-                                class="mobile-language-option flex items-center space-x-2 px-3 py-2 bg-slate-800/50 rounded-lg text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300"
+                                class="mobile-language-option flex items-center justify-center space-x-2 px-4 py-3 bg-slate-800/50 rounded-lg text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300 flex-1"
                                 data-lang="pt">
-                                <img src="Flag_of_Brazil.png" alt="Brasil" class="w-5 h-3 rounded-sm object-cover">
-                                <span class="text-sm">PT</span>
+                                <img src="Flag_of_Brazil.png" alt="Brasil" class="w-6 h-4 rounded-sm object-cover">
+                                <span class="text-sm font-medium">PT</span>
                             </button>
                             <button
-                                class="mobile-language-option flex items-center space-x-2 px-3 py-2 bg-slate-800/50 rounded-lg text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300"
+                                class="mobile-language-option flex items-center justify-center space-x-2 px-4 py-3 bg-slate-800/50 rounded-lg text-gray-300 hover:bg-slate-700/50 hover:text-blue-400 transition-colors duration-300 flex-1"
                                 data-lang="en">
                                 <img src="Flag_of_the_United_States.svg" alt="Estados Unidos"
-                                    class="w-5 h-3 rounded-sm object-cover">
-                                <span class="text-sm">EN</span>
+                                    class="w-6 h-4 rounded-sm object-cover">
+                                <span class="text-sm font-medium">EN</span>
                             </button>
                         </div>
                     </div>
@@ -1360,316 +1368,350 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="translations.js"></script>
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Aguardar o DOM estar totalmente carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mobileMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
+            // Verificar se os elementos existem antes de adicionar event listeners
+            if (mobileMenuBtn && mobileMenu) {
+                // Função para fechar o menu mobile
+                function closeMobileMenu() {
+                    mobileMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
+                // Toggle do menu ao clicar no botão
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Evitar que o clique propague
+                    mobileMenu.classList.toggle('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (icon) {
+                        if (mobileMenu.classList.contains('active')) {
+                            icon.classList.remove('fa-bars');
+                            icon.classList.add('fa-times');
+                        } else {
+                            icon.classList.remove('fa-times');
+                            icon.classList.add('fa-bars');
+                        }
+                    }
+                });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                // Evitar que cliques dentro do menu o fechem
+                mobileMenu.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+
+                // Fechar menu ao clicar fora dele
+                document.addEventListener('click', (e) => {
+                    if (mobileMenu.classList.contains('active')) {
+                        // Verificar se o clique não foi no botão ou no menu
+                        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                            closeMobileMenu();
+                        }
+                    }
+                });
+
+                // Close mobile menu when clicking on a link
+                document.querySelectorAll('#mobile-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        closeMobileMenu();
                     });
-                }
-            });
-        });
-
-        // Header background change on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('bg-slate-950/95');
-                header.classList.remove('bg-slate-950/90');
-            } else {
-                header.classList.add('bg-slate-950/90');
-                header.classList.remove('bg-slate-950/95');
+                });
             }
-        });
 
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+            // Header background change on scroll
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (header) {
+                    if (window.scrollY > 100) {
+                        header.classList.add('bg-slate-950/95');
+                        header.classList.remove('bg-slate-950/90');
+                    } else {
+                        header.classList.add('bg-slate-950/90');
+                        header.classList.remove('bg-slate-950/95');
+                    }
                 }
             });
-        }, observerOptions);
 
-        // Observe all sections for fade-in animation
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(section);
-        });
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
 
-        // Toggle certifications visibility
-        const toggleCertificationsBtn = document.getElementById('toggle-certifications');
-        const additionalCertifications = document.getElementById('additional-certifications');
-        const certificationsIcon = document.getElementById('certifications-icon');
-        const certificationsText = document.getElementById('certifications-text');
-
-        if (toggleCertificationsBtn && additionalCertifications) {
-            toggleCertificationsBtn.addEventListener('click', () => {
-                const isHidden = additionalCertifications.classList.contains('hidden');
-
-                if (isHidden) {
-                    // Show additional certifications
-                    additionalCertifications.classList.remove('hidden');
-                    certificationsIcon.classList.remove('fa-chevron-down');
-                    certificationsIcon.classList.add('fa-chevron-up');
-                    // Usar tradução para "Ver menos"
-                    if (typeof getTranslation === 'function') {
-                        certificationsText.textContent = getTranslation('education.certifications.showLess', currentLanguage || 'pt');
-                    } else {
-                        certificationsText.textContent = 'Ver menos';
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
                     }
+                });
+            }, observerOptions);
+
+            // Observe all sections for fade-in animation
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+
+            // Toggle certifications visibility
+            const toggleCertificationsBtn = document.getElementById('toggle-certifications');
+            const additionalCertifications = document.getElementById('additional-certifications');
+            const certificationsIcon = document.getElementById('certifications-icon');
+            const certificationsText = document.getElementById('certifications-text');
+
+            if (toggleCertificationsBtn && additionalCertifications) {
+                toggleCertificationsBtn.addEventListener('click', () => {
+                    const isHidden = additionalCertifications.classList.contains('hidden');
+
+                    if (isHidden) {
+                        // Show additional certifications
+                        additionalCertifications.classList.remove('hidden');
+                        if (certificationsIcon) {
+                            certificationsIcon.classList.remove('fa-chevron-down');
+                            certificationsIcon.classList.add('fa-chevron-up');
+                        }
+                        // Usar tradução para "Ver menos"
+                        if (typeof getTranslation === 'function') {
+                            certificationsText.textContent = getTranslation('education.certifications.showLess', currentLanguage || 'pt');
+                        } else {
+                            certificationsText.textContent = 'Ver menos';
+                        }
+                    } else {
+                        // Hide additional certifications
+                        additionalCertifications.classList.add('hidden');
+                        if (certificationsIcon) {
+                            certificationsIcon.classList.remove('fa-chevron-up');
+                            certificationsIcon.classList.add('fa-chevron-down');
+                        }
+                        // Usar tradução para "Ver mais"
+                        if (typeof getTranslation === 'function') {
+                            certificationsText.textContent = getTranslation('education.certifications.showMore', currentLanguage || 'pt');
+                        } else {
+                            certificationsText.textContent = 'Ver mais';
+                        }
+                    }
+                });
+            }
+
+            // Projects Carousel
+            let currentSlide = 0;
+            const track = document.getElementById('projects-track');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            function getTotalSlides() {
+                // Em mobile: 3 slides (1 por vez)
+                // Em desktop: 1 slide (3 projetos por vez)
+                return window.innerWidth >= 768 ? 1 : 3;
+            }
+
+            function getSlideWidth() {
+                // Em mobile: 100% (1 projeto por vez)
+                // Em desktop: 100% (3 projetos por vez)
+                return window.innerWidth >= 768 ? 100 : 100;
+            }
+
+            function updateCarousel() {
+                if (!track) return;
+                
+                const totalSlides = getTotalSlides();
+                const slideWidth = getSlideWidth();
+                const translateX = -currentSlide * slideWidth;
+                track.style.transform = `translateX(${translateX}%)`;
+
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    if (index === currentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+
+                // Hide/show navigation buttons based on screen size
+                if (window.innerWidth >= 768) {
+                    // Desktop: hide navigation buttons (all projects visible)
+                    if (prevBtn) prevBtn.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'none';
                 } else {
-                    // Hide additional certifications
-                    additionalCertifications.classList.add('hidden');
-                    certificationsIcon.classList.remove('fa-chevron-up');
-                    certificationsIcon.classList.add('fa-chevron-down');
-                    // Usar tradução para "Ver mais"
-                    if (typeof getTranslation === 'function') {
-                        certificationsText.textContent = getTranslation('education.certifications.showMore', currentLanguage || 'pt');
-                    } else {
-                        certificationsText.textContent = 'Ver mais';
-                    }
+                    // Mobile: show navigation buttons
+                    if (prevBtn) prevBtn.style.display = 'flex';
+                    if (nextBtn) nextBtn.style.display = 'flex';
                 }
-            });
-        }
+            }
 
-        // Projects Carousel
-        let currentSlide = 0;
-        const track = document.getElementById('projects-track');
-        const indicators = document.querySelectorAll('.carousel-indicator');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
+            function nextSlide() {
+                const totalSlides = getTotalSlides();
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }
 
-        function getTotalSlides() {
-            // Em mobile: 3 slides (1 por vez)
-            // Em desktop: 1 slide (3 projetos por vez)
-            return window.innerWidth >= 768 ? 1 : 3;
-        }
+            function prevSlide() {
+                const totalSlides = getTotalSlides();
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
 
-        function getSlideWidth() {
-            // Em mobile: 100% (1 projeto por vez)
-            // Em desktop: 100% (3 projetos por vez)
-            return window.innerWidth >= 768 ? 100 : 100;
-        }
+            // Event listeners
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
-        function updateCarousel() {
-            const totalSlides = getTotalSlides();
-            const slideWidth = getSlideWidth();
-            const translateX = -currentSlide * slideWidth;
-            track.style.transform = `translateX(${translateX}%)`;
-
-            // Update indicators
+            // Indicator clicks
             indicators.forEach((indicator, index) => {
-                if (index === currentSlide) {
-                    indicator.classList.add('active');
-                } else {
-                    indicator.classList.remove('active');
-                }
+                indicator.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateCarousel();
+                });
             });
 
-            // Hide/show navigation buttons based on screen size
-            if (window.innerWidth >= 768) {
-                // Desktop: hide navigation buttons (all projects visible)
-                if (prevBtn) prevBtn.style.display = 'none';
-                if (nextBtn) nextBtn.style.display = 'none';
-            } else {
-                // Mobile: show navigation buttons
-                if (prevBtn) prevBtn.style.display = 'flex';
-                if (nextBtn) nextBtn.style.display = 'flex';
+            // Auto-play (optional)
+            let autoPlayInterval;
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(nextSlide, 5000); // 5 seconds
             }
-        }
 
-        function nextSlide() {
-            const totalSlides = getTotalSlides();
-            currentSlide = (currentSlide + 1) % totalSlides;
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+
+            // Initialize carousel
             updateCarousel();
-        }
 
-        function prevSlide() {
-            const totalSlides = getTotalSlides();
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        }
+            // Start auto-play
+            startAutoPlay();
 
-        // Event listeners
-        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            // Pause auto-play on hover
+            const carousel = document.getElementById('projects-carousel');
+            if (carousel) {
+                carousel.addEventListener('mouseenter', stopAutoPlay);
+                carousel.addEventListener('mouseleave', startAutoPlay);
+            }
 
-        // Indicator clicks
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentSlide = index;
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                currentSlide = 0; // Reset to first slide
                 updateCarousel();
             });
-        });
 
-        // Auto-play (optional)
-        let autoPlayInterval;
-        function startAutoPlay() {
-            autoPlayInterval = setInterval(nextSlide, 5000); // 5 seconds
-        }
+            // Language Selector
+            const languageBtn = document.getElementById('language-btn');
+            const languageDropdown = document.getElementById('language-dropdown');
+            const languageOptions = document.querySelectorAll('.language-option');
+            const mobileLanguageOptions = document.querySelectorAll('.mobile-language-option');
 
-        function stopAutoPlay() {
-            clearInterval(autoPlayInterval);
-        }
+            let currentLanguage = 'pt';
+            let isInitializing = false;
 
-        // Initialize carousel
-        updateCarousel();
+            // Toggle dropdown
+            if (languageBtn && languageDropdown) {
+                languageBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    languageDropdown.classList.toggle('hidden');
+                });
+            }
 
-        // Start auto-play
-        startAutoPlay();
-
-        // Pause auto-play on hover
-        const carousel = document.getElementById('projects-carousel');
-        if (carousel) {
-            carousel.addEventListener('mouseenter', stopAutoPlay);
-            carousel.addEventListener('mouseleave', startAutoPlay);
-        }
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            currentSlide = 0; // Reset to first slide
-            updateCarousel();
-        });
-
-        // Language Selector
-        const languageBtn = document.getElementById('language-btn');
-        const languageDropdown = document.getElementById('language-dropdown');
-        const languageOptions = document.querySelectorAll('.language-option');
-        const mobileLanguageOptions = document.querySelectorAll('.mobile-language-option');
-
-        let currentLanguage = 'pt';
-        let isInitializing = false;
-
-        // Toggle dropdown
-        if (languageBtn && languageDropdown) {
-            languageBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                languageDropdown.classList.toggle('hidden');
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                if (languageDropdown) {
+                    languageDropdown.classList.add('hidden');
+                }
             });
-        }
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            if (languageDropdown) {
-                languageDropdown.classList.add('hidden');
+            // Language change function
+            function changeLanguage(lang) {
+                if (isInitializing && lang !== 'pt') {
+                    return;
+                }
+
+                currentLanguage = lang;
+
+                // Update button text
+                const code = lang === 'pt' ? 'PT' : 'EN';
+                const flagSrc = lang === 'pt' ? 'Flag_of_Brazil.png' : 'Flag_of_the_United_States.svg';
+                const flagAlt = lang === 'pt' ? 'Brasil' : 'Estados Unidos';
+
+                if (languageBtn) {
+                    languageBtn.innerHTML = `
+                <img src="${flagSrc}" alt="${flagAlt}" class="w-6 h-4 rounded-sm object-cover">
+                <span class="text-sm">${code}</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            `;
+                }
+
+                // Update active states
+                languageOptions.forEach(option => {
+                    if (option.dataset.lang === lang) {
+                        option.classList.add('bg-blue-500/20', 'text-blue-400');
+                        option.classList.remove('text-gray-300');
+                    } else {
+                        option.classList.remove('bg-blue-500/20', 'text-blue-400');
+                        option.classList.add('text-gray-300');
+                    }
+                });
+
+                mobileLanguageOptions.forEach(option => {
+                    if (option.dataset.lang === lang) {
+                        option.classList.add('bg-blue-500/20', 'text-blue-400');
+                        option.classList.remove('text-gray-300');
+                    } else {
+                        option.classList.remove('bg-blue-500/20', 'text-blue-400');
+                        option.classList.add('text-gray-300');
+                    }
+                });
+
+                // Close dropdown
+                if (languageDropdown) {
+                    languageDropdown.classList.add('hidden');
+                }
+
+                // Translate the page
+                if (typeof translatePage === 'function') {
+                    translatePage(lang);
+                }
+
+                // Save language preference
+                localStorage.setItem('selectedLanguage', lang);
             }
-        });
 
-        // Language change function
-        function changeLanguage(lang) {
-            if (isInitializing && lang !== 'pt') {
-                console.log('Preventing language change during initialization');
-                return;
-            }
-
-            currentLanguage = lang;
-            console.log('Changing language to:', lang);
-
-            // Update button text
-            const code = lang === 'pt' ? 'PT' : 'EN';
-            const flagSrc = lang === 'pt' ? 'Flag_of_Brazil.png' : 'Flag_of_the_United_States.svg';
-            const flagAlt = lang === 'pt' ? 'Brasil' : 'Estados Unidos';
-
-            if (languageBtn) {
-                languageBtn.innerHTML = `
-            <img src="${flagSrc}" alt="${flagAlt}" class="w-6 h-4 rounded-sm object-cover">
-            <span class="text-sm">${code}</span>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
-        `;
-            }
-
-            // Update active states
+            // Desktop language options
             languageOptions.forEach(option => {
-                if (option.dataset.lang === lang) {
-                    option.classList.add('bg-blue-500/20', 'text-blue-400');
-                    option.classList.remove('text-gray-300');
-                } else {
-                    option.classList.remove('bg-blue-500/20', 'text-blue-400');
-                    option.classList.add('text-gray-300');
-                }
+                option.addEventListener('click', () => {
+                    changeLanguage(option.dataset.lang);
+                });
             });
 
+            // Mobile language options
             mobileLanguageOptions.forEach(option => {
-                if (option.dataset.lang === lang) {
-                    option.classList.add('bg-blue-500/20', 'text-blue-400');
-                    option.classList.remove('text-gray-300');
-                } else {
-                    option.classList.remove('bg-blue-500/20', 'text-blue-400');
-                    option.classList.add('text-gray-300');
-                }
+                option.addEventListener('click', () => {
+                    changeLanguage(option.dataset.lang);
+                });
             });
 
-            // Close dropdown
-            if (languageDropdown) {
-                languageDropdown.classList.add('hidden');
-            }
-
-            // Translate the page
-            if (typeof translatePage === 'function') {
-                translatePage(lang);
-            }
-
-            // Save language preference
-            localStorage.setItem('selectedLanguage', lang);
-        }
-
-        // Desktop language options
-        languageOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                changeLanguage(option.dataset.lang);
-            });
-        });
-
-        // Mobile language options
-        mobileLanguageOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                changeLanguage(option.dataset.lang);
-            });
-        });
-
-        // Initialize language selector when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('DOM loaded, initializing language...');
+            // Initialize language selector
             isInitializing = true;
 
             // Force Portuguese on first load and clear any existing settings
@@ -1678,22 +1720,19 @@
 
             // Wait a bit for translations.js to load
             setTimeout(() => {
-                console.log('Executing language initialization...');
 
-                if (typeof changeLanguage === 'function') {
-                    changeLanguage(languageToUse);
-                }
+                // Call changeLanguage to set initial language
+                changeLanguage(languageToUse);
 
+                // Translate the page if translatePage function exists
                 if (typeof translatePage === 'function') {
                     translatePage(languageToUse);
                 } else {
-                    console.error('translatePage function not found');
                 }
 
                 // Allow language changes after initialization
                 setTimeout(() => {
                     isInitializing = false;
-                    console.log('Language initialization complete');
                 }, 500);
             }, 100);
         });
