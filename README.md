@@ -14,12 +14,9 @@ Demo
 
 Tecnologias
 ----------
-Exemplos comuns — substitua conforme o seu projeto:
 - HTML5
-- CSS3 (ou SCSS/Tailwind)
-- JavaScript (ou TypeScript)
-- Frameworks opcionais: React, Next.js, Vite
-- Ferramentas: Git, GitHub Pages, Netlify, Vercel
+- Tailwind CSS
+- JavaScript
 
 Recursos
 --------
@@ -27,15 +24,6 @@ Recursos
 - Seção de projetos com descrições e links ao código/demos
 - Seção de contato (e-mail e redes)
 - Responsividade para dispositivos móveis
-
-Build e deploy
---------------
-Gerar build (exemplo para React/Vite/Next):
-- npm run build
-
-Deploy simples:
-- GitHub Pages: configurar branch `gh-pages` ou usar `gh-pages` package
-- Vercel / Netlify: conectar repositório e configurar build command e output directory (`build` ou `dist`)
 
 Estrutura do projeto
 --------------------
