@@ -25,16 +25,6 @@ Recursos
 - Seção de contato (e-mail e redes)
 - Responsividade para dispositivos móveis
 
-Estrutura do projeto
---------------------
-(Exemplo — ajuste conforme seu repositório)
-- /public — arquivos públicos (favicon, imagens)
-- /src — código-fonte (HTML, CSS, JS, componentes)
-- /assets — imagens e mídias
-- README.md — documentação
-- package.json — dependências e scripts (se aplicável)
-
-
 Contato
 -------
 - GitHub: https://github.com/Guiilopes97
