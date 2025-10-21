@@ -52,35 +52,21 @@ const translations = {
         projects: {
             title: "Projetos em Destaque",
             subtitle: "Conheça alguns dos projetos que desenvolvi, demonstrando minhas habilidades técnicas e capacidade de criar soluções inovadoras.",
+            technologies: "Tecnologias",
             project1: {
-                title: "APIs de Integração",
-                description: "Desenvolvimento de APIs robustas utilizando Node.js, PHP e Python para integração segura entre sistemas corporativos.",
-                technologies: "Tecnologias",
-                features: {
-                    1: "Segurança",
-                    2: "Escalabilidade",
-                    3: "Performance"
-                },
-                codeButton: "Código"
+                title: "API - Busca de Mandados de Prisão",
+                description: "API para consulta de mandados de prisão em aberto diretamente no Banco Nacional de Medidas Penais e Prisões.",
+                codeButton: "Código Restrito"
             },
             project2: {
-                title: "Sistema de Web Scraping",
-                description: "Implementação de solução automatizada para coleta e processamento de dados com Python, otimizando processos de negócio.",
-                features: {
-                    1: "Automação",
-                    2: "ETL",
-                    3: "Integridade de Dados"
-                },
-                codeButton: "Código"
+                title: "SaaS - Gerenciamento de Granjas",
+                description: "Sistema de gerenciamento de granjas de forma automatizada, com controle de estoque, produção, vendas e financeiro.",
+                codeButton: "Código Restrito",
+                linkButton: "Acessar"
             },
             project3: {
-                title: "Dashboards Analíticos",
-                description: "Criação de relatórios interativos e dashboards em Power BI integrados com SQL para suporte à decisão estratégica.",
-                features: {
-                    1: "Visualização",
-                    2: "BI",
-                    3: "Tomada de Decisão"
-                },
+                title: "Galeria de Fotos",
+                description: "Um sistema completo de galeria de fotos seguindo o padrão MVC. Inclui funcionalidades de upload, redimensionamento automático de imagens, paginação e interface moderna.",
                 codeButton: "Código"
             }
         },
@@ -248,34 +234,22 @@ const translations = {
         projects: {
             title: "Featured Projects",
             subtitle: "Check out some of the projects I've developed, showcasing my technical skills and ability to create innovative solutions.",
+            technologies: "Technologies",
             project1: {
-                title: "Integration APIs",
-                description: "Development of robust APIs using Node.js, PHP, and Python for secure integration between corporate systems.",
-                technologies: "Technologies",
-                features: {
-                    1: "Security",
-                    2: "Scalability",
-                    3: "Performance"
-                },
-                codeButton: "Code"
+                title: "API - Search for Arrest Warrants",
+                description: "API for querying outstanding arrest warrants directly in the National Database of Penal Measures and Prisons.",
+                codeButton: "Restricted Code"
             },
             project2: {
-                title: "Web Scraping System",
-                description: "Implementation of automated solution for data collection and processing with Python, optimizing business processes.",
-                features: {
-                    1: "Automation",
-                    2: "ETL",
-                    3: "Data Integrity"
-                }
+                title: "SaaS - Poultry Farm Management System",
+                description: "Automated management system for poultry farms, including inventory, production, sales, and finance control.",
+                codeButton: "Restricted Code",
+                linkButton: "Access"
             },
             project3: {
-                title: "Analytical Dashboards",
-                description: "Creation of interactive reports and dashboards in Power BI integrated with SQL for strategic decision support.",
-                features: {
-                    1: "Visualization",
-                    2: "BI",
-                    3: "Decision Making"
-                }
+                title: "Photo Gallery",
+                description: "A complete photo gallery system following the MVC pattern. Includes image upload, automatic image resizing, pagination, and a modern interface.",
+                codeButton: "Code"
             }
         },
         
